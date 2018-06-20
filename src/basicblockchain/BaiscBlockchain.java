@@ -22,5 +22,30 @@ public class BaiscBlockchain {
         System.out.println (blockchain.get(1).hash);
     }
     
-    
+    public static boolean doValidate(){
+        for(int i=0; i<blockchain.size(); i++){
+            String hashTarget = new String(new char[difficulty]).replace('\0', '0');
+            if(i!=0){
+                Block currentblock = blockchain.get(i);
+                Block prevblock = blockchain.get(i-1);
+                
+                
+                if(!currentblock.hash.equals(currentblock.createHash()) )
+                    return false;
+                
+                if(!prevblock.hash.equals(currentblock.prevHash))
+                    return false;
+                
+                
+            }
+            else{
+                Block currentblock = blockchain.get(i);
+                
+                if(!currentblock.hash.equals(currentblock.createHash()) )
+                    return false;
+                
+            }
+        }
+        return true;
+    }
 }
